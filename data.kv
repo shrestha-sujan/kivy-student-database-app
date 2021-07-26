@@ -1,0 +1,181 @@
+WindowManager:
+    InventoryWindow:
+    OnOrderWindow:
+    OrderFormWindow:
+    AddPartWindow:
+
+<ItemLabel@Label>
+    font_size: '15sp'
+    halign: 'left'
+    valign: 'middle'
+    text_size: self.size
+
+<ItemButton@Button>
+    pos_hint: {'center_x':0.5, 'center_y':0.5}
+    size_hint: 0.65, 0.2
+
+
+<ItemButton2@Button>
+    pos_hint: {'center_x':0.5, 'center_y':0.5}
+    size_hint: 0.65, 0.2
+    on_release:
+        app.root.current = "order_form_window"
+
+
+<InventoryWindow>:
+    name: "inv_window"
+        add_probe: add_probe
+
+    FloatLayout:
+        Label:
+            text: 'DITU Student Database'
+            font_size: '30sp'
+            size_hint: (1, 0.17)
+            pos_hint: {'x': 0, 'y': 0.87}
+            bold: True
+
+    GridLayout:
+        rows: 2
+        padding:[10, 105, 10, 5]
+        spacing: 1
+
+        BoxLayout:
+            orientation: 'vertical'
+            Image:
+                id: imageView
+                source: 'logo.gif'
+                allow_stretch: True
+                keep_ratio: True
+                width: self.parent.width/2
+                height: self.parent.width/2
+                halign: 'center'
+                valign: 'middle'
+        BoxLayout:
+            orientation: 'vertical'
+            ItemLabel:
+                text:'Welcome!!\nDaaichi Koudai Institute Of Technology\nStudent Database Portal\n>>Sujan Shrestha<<'
+                halign: 'center'
+                valign: 'middle'
+        
+    GridLayout:
+        cols: 2
+        size_hint: 1, 0.15
+        padding: [10, 0, 10, 10]
+
+
+        BoxLayout:
+
+            Button:
+                text: 'Add Info to Database'
+                font_size: '18sp'
+                size_hint: (1, 0.75)
+                on_release:
+                    app.root.current = "add_part_window"
+                    root.manager.transition.direction = "right"
+
+            Button:
+                text: 'Show Database'
+                font_size: '18sp'
+                size_hint: (1, 0.75)
+                on_release:
+                    app.root.current = "on_order_window"
+                    root.manager.transition.direction = "left"
+
+
+<OnOrderWindow>:
+
+    name: "on_order_window"
+
+    FloatLayout:
+        Label:
+            text: 'Data'
+            font_size: '25sp'
+            size_hint: (1, 0.17)
+            pos_hint: {'x': 0, 'y': 0.87}
+
+        GridLayout:
+            cols: 2
+            size_int: 1, .15
+            padding:[10, 510, 10, 10]
+
+            Button:
+                text: "Home"
+                font_size: '18sp'
+                size_hint: (1, 0.6)
+                on_release:
+                    app.root.current = "inv_window"
+                    root.manager.transition.direction = "right"
+            Button:
+                text:"Add Info to Database"
+                size_hint: (1, 0.6)
+                font_size: '18sp'
+                on_release:
+                    app.root.current = "add_part_window"
+                    root.manager.transition.direction = "left"
+
+
+<AddPartWindow>
+    name: "add_part_window"
+        stu_name: stu_name
+        serial_number: serial_number
+        dob: dob
+
+    FloatLayout:
+        Label:
+            text: 'Add Info to Database'
+            font_size: '25sp'
+            size_hint: (1, 0.17)
+            pos_hint: {'x': 0, 'y': 0.86}
+
+        GridLayout:
+            cols:2
+            padding: [50, 100, 50, 120]
+            spacing: 5
+
+            ItemLabel:
+                text: "Name of Student: "
+
+            TextInput:
+                id: stu_name
+                halign: 'center'
+                valign: 'middle'
+                multinline:False
+                padding:[20,30]
+
+            ItemLabel:
+                text: "Serial Number: "
+
+            TextInput:
+                id: serial_number
+                halign: 'center'
+                valign: 'middle'
+                multiline:False
+                padding:[20,30]
+
+            ItemLabel:
+                text: "Date of Birth: "
+
+            TextInput:
+                id: dob
+                halign: 'center'
+                valign: 'middle'
+                multinline:False
+                padding:[20,30]
+
+        GridLayout:
+            cols:2
+            size_hint: 1, 0.15
+            padding: [10, 0, 10, 10]
+
+            Button:
+                text:"Cancel"
+                on_release:
+                    app.root.current = "inv_window"
+                    root.manager.transition.direction = "left"
+            
+            Button:
+                text:"Submit"
+                on_release:
+                    root.new_part()
+                    app.root.current = "inv_window"
+                    root.manager.transition.direction = "left"
