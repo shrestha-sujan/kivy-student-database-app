@@ -56,7 +56,7 @@ class DataApp(App):
     def build(self):
         #These are used to enable going back and forth between screens using buttons
         sm = ScreenManager()
-        self.title='19TE422'
+        self.title='19TE422 SHRESTHA SUJAN'
         sm.add_widget(InventoryWindow(name='inv_window'))
         sm.add_widget(OnOrderWindow(name='on_order_window'))
         sm.add_widget(AddPartWindow(name='add_part_window'))
